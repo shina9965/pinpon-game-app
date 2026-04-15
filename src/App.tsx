@@ -1,7 +1,7 @@
 /*App.tsx*/
 import './App.css'
 import GameEngine from './Presenter/GameEngine'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 
 function App() {
 
@@ -14,9 +14,29 @@ function App() {
 
   return (
     <div className='game-display'>
-      <canvas ref={canvasRef} id='game-canvas' width={gameEngineRef.current?.GetDisplaySize().width} height={gameEngineRef.current?.GetDisplaySize().height} />
-      <input className="arrow-button" id="right-arrow" type="button" value="->" onClick={() => gameEngineRef.current?.PressRight()} />
-      <input className="arrow-button" id="left-arrow" type="button" value="<-" onClick={() => gameEngineRef.current?.PressLeft()} />
+      <canvas ref={canvasRef} 
+        id='game-canvas' 
+        width={gameEngineRef.current?.GetDisplaySize().width} 
+        height={gameEngineRef.current?.GetDisplaySize().height} 
+      />
+      <input
+        className="arrow-button"
+        id="right-arrow"
+        type="button"
+        value="->"
+        onPointerDown={() => gameEngineRef.current?.PressRight()}
+        onPointerUp={() => gameEngineRef.current?.ReleaseRight()}
+        onPointerLeave={() => gameEngineRef.current?.ReleaseRight()}
+      />
+      <input
+        className="arrow-button"
+        id="left-arrow"
+        type="button"
+        value="<-"
+        onPointerDown={() => gameEngineRef.current?.PressLeft()}
+        onPointerUp={() => gameEngineRef.current?.ReleaseLeft()}
+        onPointerLeave={() => gameEngineRef.current?.ReleaseLeft()}
+      />
     </div>
   )
 }
