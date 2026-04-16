@@ -21,5 +21,4 @@ export default class InputModal {
   public setLeftPressed(value: boolean) {
     this.input_x.leftPressed = value
   }
-
 }

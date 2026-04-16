@@ -1,40 +1,40 @@
-/*GameEngine.tsx*/
 import GameDisplayModel from "../Model/GameDisplayModel"
-import InputModal from "../Model/InputModal"
+import InputModal from "../Model/InputModel"
 
 export default class GameEngine {
-
+  private renderer: HTMLCanvasElement
   private gameDisplayModel: GameDisplayModel
-  private inputModel : InputModal
+  private inputModel: InputModal
 
-
-  constructor() {
+  constructor(renderer: HTMLCanvasElement) {
     console.log('GameEngine initialized')
+
+    this.renderer = renderer
     this.gameDisplayModel = new GameDisplayModel()
     this.inputModel = new InputModal()
   }
 
   public PressRight() {
     this.inputModel.setRightPressed(true)
-    console.log("Right pressed" + this.inputModel.getRightPressed())
+    console.log("Right pressed " + this.inputModel.getRightPressed())
   }
 
   public ReleaseRight() {
     this.inputModel.setRightPressed(false)
-    console.log("Right released" + this.inputModel.getRightPressed())
+    console.log("Right released " + this.inputModel.getRightPressed())
   }
 
   public PressLeft() {
     this.inputModel.setLeftPressed(true)
-    console.log("Left pressed" + this.inputModel.getLeftPressed())
+    console.log("Left pressed " + this.inputModel.getLeftPressed())
   }
 
   public ReleaseLeft() {
     this.inputModel.setLeftPressed(false)
-    console.log("Left released" + this.inputModel.getLeftPressed())
+    console.log("Left released " + this.inputModel.getLeftPressed())
   }
 
-  public GetDisplaySize(){
+  public GetDisplaySize() {
     return this.gameDisplayModel.GetGameCanvasSize()
   }
 }

@@ -1,24 +1,34 @@
-/*App.tsx*/
 import './App.css'
 import GameEngine from './Presenter/GameEngine'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 function App() {
-
   const gameEngineRef = useRef<GameEngine | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const [displaySize, setDisplaySize] = useState({ width: 0, height: 0 })
 
-  if (!gameEngineRef.current) {
-    gameEngineRef.current = new GameEngine()
-  }
+  useEffect(() => {
+    if (!canvasRef.current) return
+
+    const gameEngine = new GameEngine(canvasRef.current)
+    gameEngineRef.current = gameEngine
+
+    setDisplaySize(gameEngine.GetDisplaySize())
+
+    return () => {
+      gameEngineRef.current = null
+    }
+  }, [])
 
   return (
     <div className='game-display'>
-      <canvas ref={canvasRef} 
-        id='game-canvas' 
-        width={gameEngineRef.current?.GetDisplaySize().width} 
-        height={gameEngineRef.current?.GetDisplaySize().height} 
+      <canvas
+        ref={canvasRef}
+        id='game-canvas'
+        width={displaySize.width}
+        height={displaySize.height}
       />
+
       <input
         className="arrow-button"
         id="right-arrow"
@@ -28,6 +38,7 @@ function App() {
         onPointerUp={() => gameEngineRef.current?.ReleaseRight()}
         onPointerLeave={() => gameEngineRef.current?.ReleaseRight()}
       />
+
       <input
         className="arrow-button"
         id="left-arrow"
