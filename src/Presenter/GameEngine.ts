@@ -26,6 +26,11 @@ export default class GameEngine {
     this.playerPresenter = new PlayerPresenter(this.playerModel, this.inputModel, this.renderer)
   }
 
+  public Update(deltaTime: number) {
+    
+    
+  }
+
   public PressRight() {
     this.inputModel.setRightPressed(true)
     console.log("Right pressed " + this.inputModel.getRightPressed())

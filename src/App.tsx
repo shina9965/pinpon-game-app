@@ -5,6 +5,9 @@ import { useEffect, useRef, useState } from 'react'
 function App() {
   const gameEngineRef = useRef<GameEngine | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const animationIdRef = useRef<number | null>(null)
+  const lastTimeRef = useRef<number | null>(null)
+
   const [displaySize, setDisplaySize] = useState({ width: 0, height: 0 })
 
   useEffect(() => {
@@ -15,9 +18,27 @@ function App() {
 
     setDisplaySize(gameEngine.GetDisplaySize())
 
+    const loop = (time: number) => {
+      // 前フレームからの経過時間(ms)
+      const deltaTime =
+        lastTimeRef.current === null ? 0 : time - lastTimeRef.current;
+      lastTimeRef.current = time;
+
+      // ここに毎フレームやりたい処理を書く
+      console.log("frame", deltaTime);
+      gameEngine.Update(deltaTime);
+
+      animationIdRef.current = requestAnimationFrame(loop);
+    };
+
+    animationIdRef.current = requestAnimationFrame(loop);
+
     return () => {
+      if (animationIdRef.current !== null) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
       gameEngineRef.current = null
-    }
+    };
   }, [])
 
   return (
