@@ -1,5 +1,5 @@
 
-export default class PlayerPresenter {
+export default class PlayerModel {
 
   private position = {
     x: 0,

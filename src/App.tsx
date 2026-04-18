@@ -1,9 +1,10 @@
 import './App.css'
 import GameEngine from './Presenter/GameEngine'
+import IGameEngine from './Presenter/GameEngine'
 import { useEffect, useRef, useState } from 'react'
 
 function App() {
-  const gameEngineRef = useRef<GameEngine | null>(null)
+  const gameEngineRef = useRef<IGameEngine | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const animationIdRef = useRef<number | null>(null)
   const lastTimeRef = useRef<number | null>(null)
@@ -24,8 +25,6 @@ function App() {
         lastTimeRef.current === null ? 0 : time - lastTimeRef.current;
       lastTimeRef.current = time;
 
-      // ここに毎フレームやりたい処理を書く
-      console.log("frame", deltaTime);
       gameEngine.Update(deltaTime);
 
       animationIdRef.current = requestAnimationFrame(loop);

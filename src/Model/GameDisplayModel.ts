@@ -1,6 +1,10 @@
 /*GameDisplayModel.tsx*/
+export default interface IGameDisplayModel {
+  GetGameCanvasSize(): { width: number, height: number }
+}
 
-export default class GameDisplayModel {
+
+export default class GameDisplayModel implements IGameDisplayModel {
 
   private gameCanvasSize = {
     width: 800,

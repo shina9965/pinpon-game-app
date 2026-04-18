@@ -3,15 +3,23 @@
 import GameDisplayModel from "../Model/GameDisplayModel"
 import InputModal from "../Model/InputModel"
 import Renderer from "../View/Renderer"
-import PlayerModel from "../Model/PlayerModel"
-import PlayerPresenter from "./PlayerPresenter"
+import IGameDisplayModel from "../Model/GameDisplayModel"
+import IInputModel from "../Model/InputModel"
 
-export default class GameEngine {
-  private gameDisplayModel: GameDisplayModel
-  private inputModel: InputModal
+
+export default interface IGameEngine {
+  Update(deltaTime: number): void
+  PressRight(): void
+  ReleaseRight(): void
+  PressLeft(): void
+  ReleaseLeft(): void
+  GetDisplaySize(): { width: number, height: number }
+}
+
+export default class GameEngine implements IGameEngine {
+  private gameDisplayModel: IGameDisplayModel
+  private inputModel: IInputModel
   private renderer: Renderer
-  private playerPresenter: PlayerPresenter
-  private playerModel: PlayerModel
 
   constructor(canvas: HTMLCanvasElement) {
     console.log('GameEngine initialized')
@@ -21,14 +29,11 @@ export default class GameEngine {
     this.inputModel = new InputModal()
     this.renderer = new Renderer(canvas)
 
-    //initialize presenters
-    this.playerModel = new PlayerModel()
-    this.playerPresenter = new PlayerPresenter(this.playerModel, this.inputModel, this.renderer)
   }
 
   public Update(deltaTime: number) {
     
-    
+    console.log("frame", deltaTime);
   }
 
   public PressRight() {

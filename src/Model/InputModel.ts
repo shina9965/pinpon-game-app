@@ -1,5 +1,12 @@
+export default interface IInputModel {
+  getRightPressed(): boolean
+  setRightPressed(value: boolean): void
+  getLeftPressed(): boolean
+  setLeftPressed(value: boolean): void
+}
 
-export default class InputModal {
+
+export default class InputModal implements IInputModel {
 
   private input_x = {
     rightPressed: false,
