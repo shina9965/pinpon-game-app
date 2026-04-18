@@ -14,4 +14,6 @@ export default class GameDisplayModel implements IGameDisplayModel {
   public GetGameCanvasSize() {
     return this.gameCanvasSize
   }
+
+  
 }

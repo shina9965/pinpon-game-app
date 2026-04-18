@@ -27,13 +27,15 @@ export default class GameEngine implements IGameEngine {
     //initialize models
     this.gameDisplayModel = new GameDisplayModel()
     this.inputModel = new InputModal()
-    this.renderer = new Renderer(canvas)
+    this.renderer = new Renderer(canvas, this.gameDisplayModel)
 
   }
 
   public Update(deltaTime: number) {
     
     console.log("frame", deltaTime);
+
+    
   }
 
   public PressRight() {
