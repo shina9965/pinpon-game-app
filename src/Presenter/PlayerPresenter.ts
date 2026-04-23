@@ -18,7 +18,7 @@ export default class PlayerPresenter extends GameObject {
     console.log('PlayerPresenter initialized')
   }
 
-  private Start() {
+  public Start() {
   }
 
   public Update(deltaTime: number) {

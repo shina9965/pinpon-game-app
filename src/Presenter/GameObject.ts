@@ -1,3 +1,4 @@
+// GameObject.ts
 import GameObjectModel from "../Model/GameObjectModel"
 import IGameObjectModal from "../Model/GameObjectModel"
 import IRenderer from "../View/Renderer"
@@ -19,6 +20,6 @@ export default abstract class GameObject{
 
   public Rendering(renderer: IRenderer) {
 
-
+    
   }
 }
