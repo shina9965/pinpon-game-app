@@ -1,13 +1,10 @@
 // GameEngine.ts
 //ゲームエンジンに関するクラス。Input、Render、Display、Updateを管理
-import GameDisplayModel from "../Model/GameDisplayModel"
-import InputModal from "../Model/InputModel"
-import Renderer from "../View/Renderer"
-import IGameDisplayModel from "../Model/GameDisplayModel"
-import IInputModel from "../Model/InputModel"
+import { type IGameDisplayModel, GameDisplayModel } from "../Model/GameDisplayModel"
+import { type IInputModel, InputModal } from "../Model/InputModel"
 
 
-export default interface IGameEngine {
+export interface IGameEngine {
   Update(deltaTime: number): void
   PressRight(): void
   ReleaseRight(): void
@@ -16,10 +13,9 @@ export default interface IGameEngine {
   GetDisplaySize(): { width: number, height: number }
 }
 
-export default class GameEngine implements IGameEngine {
+export class GameEngine implements IGameEngine {
   private gameDisplayModel: IGameDisplayModel
   private inputModel: IInputModel
-  private renderer: Renderer
 
   constructor(canvas: HTMLCanvasElement) {
     console.log('GameEngine initialized')
@@ -27,7 +23,6 @@ export default class GameEngine implements IGameEngine {
     //initialize models
     this.gameDisplayModel = new GameDisplayModel()
     this.inputModel = new InputModal()
-    this.renderer = new Renderer(canvas, this.gameDisplayModel)
 
   }
 
@@ -39,23 +34,23 @@ export default class GameEngine implements IGameEngine {
   }
 
   public PressRight() {
-    this.inputModel.setRightPressed(true)
-    console.log("Right pressed " + this.inputModel.getRightPressed())
+    this.inputModel.SetRightPressed(true)
+    console.log("Right pressed " + this.inputModel.GetRightPressed())
   }
 
   public ReleaseRight() {
-    this.inputModel.setRightPressed(false)
-    console.log("Right released " + this.inputModel.getRightPressed())
+    this.inputModel.SetRightPressed(false)
+    console.log("Right released " + this.inputModel.GetRightPressed())
   }
 
   public PressLeft() {
-    this.inputModel.setLeftPressed(true)
-    console.log("Left pressed " + this.inputModel.getLeftPressed())
+    this.inputModel.SetLeftPressed(true)
+    console.log("Left pressed " + this.inputModel.GetLeftPressed())
   }
 
   public ReleaseLeft() {
-    this.inputModel.setLeftPressed(false)
-    console.log("Left released " + this.inputModel.getLeftPressed())
+    this.inputModel.SetLeftPressed(false)
+    console.log("Left released " + this.inputModel.GetLeftPressed())
   }
 
   public GetDisplaySize() {

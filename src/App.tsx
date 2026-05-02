@@ -1,6 +1,5 @@
 import './App.css'
-import GameEngine from './Presenter/GameEngine'
-import IGameEngine from './Presenter/GameEngine'
+import { GameEngine, type IGameEngine } from './Presenter/GameEngine'
 import { useEffect, useRef, useState } from 'react'
 
 function App() {

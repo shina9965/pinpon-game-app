@@ -1,31 +1,31 @@
-export default interface IInputModel {
-  getRightPressed(): boolean
-  setRightPressed(value: boolean): void
-  getLeftPressed(): boolean
-  setLeftPressed(value: boolean): void
+export interface IInputModel {
+  GetRightPressed(): boolean
+  SetRightPressed(value: boolean): void
+  GetLeftPressed(): boolean
+  SetLeftPressed(value: boolean): void
 }
 
 
-export default class InputModal implements IInputModel {
+export class InputModal implements IInputModel {
 
   private input_x = {
     rightPressed: false,
     leftPressed: false
   }
 
-  public getRightPressed() {
+  public GetRightPressed() {
     return this.input_x.rightPressed
   }
 
-  public setRightPressed(value: boolean) {
+  public SetRightPressed(value: boolean) {
     this.input_x.rightPressed = value
   }
 
-  public getLeftPressed() {
+  public GetLeftPressed() {
     return this.input_x.leftPressed
   }
 
-  public setLeftPressed(value: boolean) {
+  public SetLeftPressed(value: boolean) {
     this.input_x.leftPressed = value
   }
 }
