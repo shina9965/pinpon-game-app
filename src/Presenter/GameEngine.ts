@@ -2,10 +2,12 @@
 //ゲームエンジンに関するクラス。Input、Render、Display、Updateを管理
 import { type IGameDisplayModel, GameDisplayModel } from "../Model/GameDisplayModel"
 import { type IInputModel, InputModal } from "../Model/InputModel"
+import { type IUpdate } from "../Interface/IUpdate"
+import { Test } from "./Test"
 
 
 export interface IGameEngine {
-  Update(deltaTime: number): void
+  MainUpdate(deltaTime: number): void
   PressRight(): void
   ReleaseRight(): void
   PressLeft(): void
@@ -16,6 +18,11 @@ export interface IGameEngine {
 export class GameEngine implements IGameEngine {
   private gameDisplayModel: IGameDisplayModel
   private inputModel: IInputModel
+  private static updateObjects: IUpdate[]
+
+  //test用のUpdateオブジェクト
+  private testUpdate: Test
+  //
 
   constructor(canvas: HTMLCanvasElement) {
     console.log('GameEngine initialized')
@@ -23,14 +30,20 @@ export class GameEngine implements IGameEngine {
     //initialize models
     this.gameDisplayModel = new GameDisplayModel()
     this.inputModel = new InputModal()
+    GameEngine.updateObjects = []
 
+    //test用のUpdateオブジェクトを追加
+    this.testUpdate = new Test()
+    //
   }
 
-  public Update(deltaTime: number) {
+  public MainUpdate(deltaTime: number) {
     
     console.log("frame", deltaTime);
 
-    
+    for (const obj of GameEngine.updateObjects) {
+      obj.Update()
+    }
   }
 
   public PressRight() {
@@ -55,5 +68,16 @@ export class GameEngine implements IGameEngine {
 
   public GetDisplaySize() {
     return this.gameDisplayModel.GetGameCanvasSize()
+  }
+
+  static AddUpdateObject(obj: IUpdate): void {
+    GameEngine.updateObjects.push(obj)
+  }
+
+  static RemoveUpdateObject(obj: IUpdate): void {
+    const index = GameEngine.updateObjects.indexOf(obj)
+    if (index > -1) {
+      GameEngine.updateObjects.splice(index, 1)
+    }
   }
 }

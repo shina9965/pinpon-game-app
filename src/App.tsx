@@ -24,7 +24,7 @@ function App() {
         lastTimeRef.current === null ? 0 : time - lastTimeRef.current;
       lastTimeRef.current = time;
 
-      gameEngine.Update(deltaTime);
+      gameEngine.MainUpdate(deltaTime);
 
       animationIdRef.current = requestAnimationFrame(loop);
     };
