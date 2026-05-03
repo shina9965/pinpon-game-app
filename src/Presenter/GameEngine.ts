@@ -4,6 +4,7 @@ import { type IGameDisplayModel, GameDisplayModel } from "../Model/GameDisplayMo
 import { type IInputModel, InputModal } from "../Model/InputModel"
 import { type IUpdate } from "../Interface/IUpdate"
 import { Test } from "./Test"
+import { GameObjectPresenter } from "./GameObjectPresenter"
 
 
 export interface IGameEngine {
@@ -19,6 +20,7 @@ export class GameEngine implements IGameEngine {
   private gameDisplayModel: IGameDisplayModel
   private inputModel: IInputModel
   private static updateObjects: IUpdate[]
+  private GameObjectPresenter: GameObjectPresenter
 
   //test用のUpdateオブジェクト
   private testUpdate: Test
@@ -31,6 +33,9 @@ export class GameEngine implements IGameEngine {
     this.gameDisplayModel = new GameDisplayModel()
     this.inputModel = new InputModal()
     GameEngine.updateObjects = []
+
+    //initialize presenter
+    this.GameObjectPresenter = new GameObjectPresenter()
 
     //test用のUpdateオブジェクトを追加
     this.testUpdate = new Test()

@@ -1,5 +1,5 @@
 import { type IUpdate } from "../Interface/IUpdate"
-import { GameEngine, type IGameEngine } from "./GameEngine"
+import { GameEngine} from "./GameEngine"
 
 
 
