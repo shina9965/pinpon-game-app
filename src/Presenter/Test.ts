@@ -7,11 +7,11 @@ import { GameEngine} from "./GameEngine"
 
 export class Test implements IUpdate, IRendererUpdate {
 
-  constructor() {
+  constructor(gameEngine: GameEngine) {
     console.log("TestUpdate initialized")
 
-    GameEngine.AddUpdateObject(this)
-    GameEngine.AddRendererUpdateObject(this)
+    gameEngine.AddUpdateObject(this)
+    gameEngine.AddRendererUpdateObject(this)
   }
 
   Update(): void {

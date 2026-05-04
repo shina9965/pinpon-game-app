@@ -1,10 +1,13 @@
+import type { GameEngine } from "./GameEngine"
 import {type IGameObject } from "./GameObject"
 
 export class GameObjectPresenter {
 
   private static GameObjectList: IGameObject[] = []
+  private gameEngine: GameEngine
 
-  constructor() {
+  constructor(gameEngine: GameEngine) {
+    this.gameEngine = gameEngine
     console.log("GameObjectPresenter initialized")
   }
 

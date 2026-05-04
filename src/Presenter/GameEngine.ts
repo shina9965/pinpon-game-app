@@ -14,13 +14,18 @@ export interface IGameEngine {
   PressLeft(): void
   ReleaseLeft(): void
   GetDisplaySize(): { width: number, height: number }
+  AddUpdateObject(obj: IUpdate): void 
+  RemoveUpdateObject(obj: IUpdate): void 
+  AddRendererUpdateObject(obj: IRendererUpdate): void 
+  RemoveRendererUpdateObject(obj: IRendererUpdate): void 
+  
 }
 
 export class GameEngine implements IGameEngine {
   private gameDisplayModel: IGameDisplayModel
   private inputModel: IInputModel
-  private static updateObjects: IUpdate[]
-  private static RendererUpdateObjects: IRendererUpdate[]
+  private updateObjects: IUpdate[]
+  private RendererUpdateObjects: IRendererUpdate[]
   private GameObjectPresenter: GameObjectPresenter
 
   //test用のUpdateオブジェクト
@@ -33,14 +38,14 @@ export class GameEngine implements IGameEngine {
     //initialize models
     this.gameDisplayModel = new GameDisplayModel()
     this.inputModel = new InputModal()
-    GameEngine.updateObjects = []
-    GameEngine.RendererUpdateObjects = []
+    this.updateObjects = []
+    this.RendererUpdateObjects = []
 
     //initialize presenter
-    this.GameObjectPresenter = new GameObjectPresenter()
+    this.GameObjectPresenter = new GameObjectPresenter(this)
 
     //test用のUpdateオブジェクトを追加
-    this.testUpdate = new Test()
+    this.testUpdate = new Test(this)
     //
   }
 
@@ -48,16 +53,16 @@ export class GameEngine implements IGameEngine {
     
     console.log("frame", deltaTime);
 
-    if (GameEngine.RendererUpdateObjects.length === 0 || GameEngine.updateObjects.length === 0) {
+    if (this.RendererUpdateObjects.length === 0 || this.updateObjects.length === 0) {
       console.log("No objects to update")
       return
     }
 
-    for (const obj of GameEngine.RendererUpdateObjects) {
+    for (const obj of this.RendererUpdateObjects) {
       obj.RendererUpdate(deltaTime)
     }
 
-    for (const obj of GameEngine.updateObjects) {
+    for (const obj of this.updateObjects) {
       obj.Update()
     }
   }
@@ -86,31 +91,31 @@ export class GameEngine implements IGameEngine {
     return this.gameDisplayModel.GetGameCanvasSize()
   }
 
-  static AddUpdateObject(obj: IUpdate): void {
+  AddUpdateObject(obj: IUpdate): void {
 
     console.log("Adding Update object", obj)
 
-    GameEngine.updateObjects.push(obj)
+    this.updateObjects.push(obj)
   }
 
-  static RemoveUpdateObject(obj: IUpdate): void {
-    const index = GameEngine.updateObjects.indexOf(obj)
+  RemoveUpdateObject(obj: IUpdate): void {
+    const index = this.updateObjects.indexOf(obj)
     if (index > -1) {
-      GameEngine.updateObjects.splice(index, 1)
+      this.updateObjects.splice(index, 1)
     }
   }
 
-  static AddRendererUpdateObject(obj: IRendererUpdate): void {
+  AddRendererUpdateObject(obj: IRendererUpdate): void {
 
     console.log("Adding RendererUpdate object", obj)
 
-    GameEngine.RendererUpdateObjects.push(obj)
+    this.RendererUpdateObjects.push(obj)
   }
 
-  static RemoveRendererUpdateObject(obj: IRendererUpdate): void {
-    const index = GameEngine.RendererUpdateObjects.indexOf(obj)
+  RemoveRendererUpdateObject(obj: IRendererUpdate): void {
+    const index = this.RendererUpdateObjects.indexOf(obj)
     if (index > -1) {
-      GameEngine.RendererUpdateObjects.splice(index, 1)
+      this.RendererUpdateObjects.splice(index, 1)
     }
   }
 }
