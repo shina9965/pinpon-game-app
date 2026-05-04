@@ -4,5 +4,5 @@ export interface IUpdate {
 }
 
 export interface IRendererUpdate {
-  RendererUpdate(): void
+  RendererUpdate(deltaTime: number): void
 }

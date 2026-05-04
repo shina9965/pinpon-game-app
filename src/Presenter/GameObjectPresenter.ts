@@ -1,5 +1,4 @@
-import type { UUIDTypes } from "uuid"
-import { GameObject, type IGameObject } from "./GameObject"
+import {type IGameObject } from "./GameObject"
 
 export class GameObjectPresenter {
 

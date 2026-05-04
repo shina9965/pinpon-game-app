@@ -2,7 +2,7 @@
 //ゲームエンジンに関するクラス。Input、Render、Display、Updateを管理
 import { type IGameDisplayModel, GameDisplayModel } from "../Model/GameDisplayModel"
 import { type IInputModel, InputModal } from "../Model/InputModel"
-import { type IUpdate } from "../Interface/IUpdate"
+import { type IUpdate, type IRendererUpdate} from "../Interface/IUpdate"
 import { Test } from "./Test"
 import { GameObjectPresenter } from "./GameObjectPresenter"
 
@@ -20,6 +20,7 @@ export class GameEngine implements IGameEngine {
   private gameDisplayModel: IGameDisplayModel
   private inputModel: IInputModel
   private static updateObjects: IUpdate[]
+  private static RendererUpdateObjects: IRendererUpdate[]
   private GameObjectPresenter: GameObjectPresenter
 
   //test用のUpdateオブジェクト
@@ -33,6 +34,7 @@ export class GameEngine implements IGameEngine {
     this.gameDisplayModel = new GameDisplayModel()
     this.inputModel = new InputModal()
     GameEngine.updateObjects = []
+    GameEngine.RendererUpdateObjects = []
 
     //initialize presenter
     this.GameObjectPresenter = new GameObjectPresenter()
@@ -45,6 +47,15 @@ export class GameEngine implements IGameEngine {
   public MainUpdate(deltaTime: number) {
     
     console.log("frame", deltaTime);
+
+    if (GameEngine.RendererUpdateObjects.length === 0 || GameEngine.updateObjects.length === 0) {
+      console.log("No objects to update")
+      return
+    }
+
+    for (const obj of GameEngine.RendererUpdateObjects) {
+      obj.RendererUpdate(deltaTime)
+    }
 
     for (const obj of GameEngine.updateObjects) {
       obj.Update()
@@ -76,6 +87,9 @@ export class GameEngine implements IGameEngine {
   }
 
   static AddUpdateObject(obj: IUpdate): void {
+
+    console.log("Adding Update object", obj)
+
     GameEngine.updateObjects.push(obj)
   }
 
@@ -83,6 +97,20 @@ export class GameEngine implements IGameEngine {
     const index = GameEngine.updateObjects.indexOf(obj)
     if (index > -1) {
       GameEngine.updateObjects.splice(index, 1)
+    }
+  }
+
+  static AddRendererUpdateObject(obj: IRendererUpdate): void {
+
+    console.log("Adding RendererUpdate object", obj)
+
+    GameEngine.RendererUpdateObjects.push(obj)
+  }
+
+  static RemoveRendererUpdateObject(obj: IRendererUpdate): void {
+    const index = GameEngine.RendererUpdateObjects.indexOf(obj)
+    if (index > -1) {
+      GameEngine.RendererUpdateObjects.splice(index, 1)
     }
   }
 }
