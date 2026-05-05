@@ -12,5 +12,15 @@ export class TestGameObject extends GameObject {
 
   public Update() {
 
+    console.log("TestGameObject Update called", this.GameObjectModel.GetPosition().x)
+
+    if(this.inputModel.GetRightPressed()){
+      this.GameObjectModel.SetPosition(this.GameObjectModel.GetPosition().x + 20, this.GameObjectModel.GetPosition().y)
+
+    }
+    if(this.inputModel.GetLeftPressed()){
+      this.GameObjectModel.SetPosition(this.GameObjectModel.GetPosition().x - 20, this.GameObjectModel.GetPosition().y)
+    }
+
   }
 }

@@ -8,6 +8,7 @@ export interface IGameObjectModel {
   GetSize(): { width: number, height: number }
   GetDirection(): { x: number, y: number }
   SetDirection(x: number, y: number): void
+  GetColor(): string
   GetUUID(): string
 }
 
@@ -17,13 +18,15 @@ export class GameObjectModel implements IGameObjectModel {
   private position: { x: number, y: number }
   private size: { width: number, height: number }
   private direction: { x: number, y: number }
+  private color: string
   private uuid: string
 
-  constructor(shape: string, position: { x: number, y: number }, size: { width: number, height: number }, direction: { x: number, y: number }) {
+  constructor(shape: string, position: { x: number, y: number }, size: { width: number, height: number }, direction: { x: number, y: number }, color: string) {
     this.shape = shape
     this.position = position
     this.size = size
     this.direction = direction
+    this.color = color
     this.uuid = uuidv4()
   }
 
@@ -59,8 +62,12 @@ export class GameObjectModel implements IGameObjectModel {
   this.direction = {
     x: x / length,
     y: y / length
+    }
   }
-}
+
+  public GetColor() {
+    return this.color
+  }
 
   public GetUUID() {
     return this.uuid

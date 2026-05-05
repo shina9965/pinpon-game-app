@@ -23,10 +23,11 @@ export interface IGameEngine {
 
 export class GameEngine implements IGameEngine {
   private gameDisplayModel: IGameDisplayModel
-  private inputModel: IInputModel
+  public inputModel: IInputModel
   private updateObjects: IUpdate[]
   private RendererUpdateObjects: IRendererUpdate[]
   private GameObjectPresenter: GameObjectPresenter
+  public canvas: HTMLCanvasElement
 
   //test用のUpdateオブジェクト
   private testUpdate: Test
@@ -34,6 +35,7 @@ export class GameEngine implements IGameEngine {
 
   constructor(canvas: HTMLCanvasElement) {
     console.log('GameEngine initialized')
+    this.canvas = canvas
 
     //initialize models
     this.gameDisplayModel = new GameDisplayModel()
