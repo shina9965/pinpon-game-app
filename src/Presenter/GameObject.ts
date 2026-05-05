@@ -22,7 +22,7 @@ export abstract class GameObject implements IGameObject {
   constructor(GameObjectModel: IGameObjectModel, gameEngine: GameEngine, inputModel: IInputModel) {
     console.log("GameObject initialized")
 
-    this.rigidBody = new RigidBody(GameObjectModel)
+    this.rigidBody = new RigidBody(GameObjectModel, gameEngine.GetDisplaySize())
 
     this.GameObjectModel = GameObjectModel
     this.inputModel = inputModel

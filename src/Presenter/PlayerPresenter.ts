@@ -16,7 +16,6 @@ export class PlayerPresenter extends GameObject {
 
   public Update() {
 
-    
     if(this.inputModel.GetRightPressed()){
 
       this.GameObjectModel.SetDirection(1, 0)
