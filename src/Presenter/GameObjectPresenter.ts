@@ -3,11 +3,11 @@
 import { GameEngine } from "./GameEngine"
 import {type IGameObject } from "./GameObject"
 import { GameObjectModel } from "../Model/GameObjectModel"
-import { TestGameObject } from "./TestGameObject"
 import { Renderer, type IRenderer } from "../View"
 import { BlockPresenter } from "./BlockPresenter"
 import { PlayerPresenter } from "./PlayerPresenter"
 import { ColisionPresenter } from "./ColisionPresenter"
+import { BallPresenter } from "./BallPresenter"
 
 export class GameObjectPresenter {
 
@@ -27,7 +27,9 @@ export class GameObjectPresenter {
     const gameObject = new PlayerPresenter(gameObjectModel, this.gameEngine, this.gameEngine.inputModel)
     this.GameObjectList.push(gameObject)
 
-    
+    const ballModel = new GameObjectModel("Circle", { x: 400, y: 500 }, { width: 20, height: 20 }, { x: 0.5, y: 0.5 }, "darkred")
+    const ball = new BallPresenter(ballModel, this.gameEngine, this.gameEngine.inputModel)
+    this.GameObjectList.push(ball)
 
     const blockWidth = 70
     const blockHeight = 25

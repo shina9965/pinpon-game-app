@@ -13,7 +13,7 @@ export abstract class GameObject implements IGameObject {
 
   protected GameObjectModel: IGameObjectModel
   protected rigidBody: RigidBody
-  private gameEngine: GameEngine
+  protected gameEngine: GameEngine
   protected inputModel: IInputModel
 
   private canvas: HTMLCanvasElement;
@@ -29,7 +29,7 @@ export abstract class GameObject implements IGameObject {
     this.gameEngine = gameEngine
     this.gameEngine.AddUpdateObject(this)
     this.gameEngine.AddRendererUpdateObject(this.rigidBody)
-    
+
 
     this.canvas = this.gameEngine.canvas
     const ctx = this.canvas.getContext("2d")
