@@ -50,22 +50,22 @@ function App() {
 
       <input
         className="arrow-button"
-        id="right-arrow"
-        type="button"
-        value="->"
-        onPointerDown={() => gameEngineRef.current?.PressRight()}
-        onPointerUp={() => gameEngineRef.current?.ReleaseRight()}
-        onPointerLeave={() => gameEngineRef.current?.ReleaseRight()}
-      />
-
-      <input
-        className="arrow-button"
         id="left-arrow"
         type="button"
         value="<-"
         onPointerDown={() => gameEngineRef.current?.PressLeft()}
         onPointerUp={() => gameEngineRef.current?.ReleaseLeft()}
         onPointerLeave={() => gameEngineRef.current?.ReleaseLeft()}
+      />
+
+      <input
+        className="arrow-button"
+        id="right-arrow"
+        type="button"
+        value="->"
+        onPointerDown={() => gameEngineRef.current?.PressRight()}
+        onPointerUp={() => gameEngineRef.current?.ReleaseRight()}
+        onPointerLeave={() => gameEngineRef.current?.ReleaseRight()}
       />
     </div>
   )
