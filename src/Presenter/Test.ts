@@ -14,11 +14,11 @@ export class Test implements IUpdate, IRendererUpdate {
     gameEngine.AddRendererUpdateObject(this)
   }
 
-  Update(): void {
+  Update() {
     console.log("TestUpdate Update called")
   }
 
-  RendererUpdate(deltaTime: number): void {
+  RendererUpdate(deltaTime: number) {
     console.log("TestUpdate RendererUpdate called")
   }
 }

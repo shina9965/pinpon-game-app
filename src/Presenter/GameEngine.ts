@@ -29,9 +29,7 @@ export class GameEngine implements IGameEngine {
   private GameObjectPresenter: GameObjectPresenter
   public canvas: HTMLCanvasElement
 
-  //test用のUpdateオブジェクト
-  private testUpdate: Test
-  //
+  
 
   constructor(canvas: HTMLCanvasElement) {
     console.log('GameEngine initialized')
@@ -45,15 +43,9 @@ export class GameEngine implements IGameEngine {
 
     //initialize presenter
     this.GameObjectPresenter = new GameObjectPresenter(this)
-
-    //test用のUpdateオブジェクトを追加
-    this.testUpdate = new Test(this)
-    //
   }
 
   public MainUpdate(deltaTime: number) {
-    
-    console.log("frame", deltaTime);
 
     if (this.RendererUpdateObjects.length === 0 || this.updateObjects.length === 0) {
       console.log("No objects to update")
