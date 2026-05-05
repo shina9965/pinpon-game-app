@@ -1,6 +1,6 @@
 
 
-import { GameObject } from "./GameObject";
+import { GameObject, type IGameObject} from "./GameObject";
 import type { IGameObjectModel } from "../Model/GameObjectModel"
 import type { IInputModel } from "../Model";
 import { GameEngine } from "./GameEngine";
@@ -25,5 +25,9 @@ export class PlayerPresenter extends GameObject {
       this.GameObjectModel.SetDirection(-1, 0)
       this.rigidBody.Move(this.speed)
     }
+  }
+
+  public Colision(obj: IGameObject) {
+    console.log("PlayerPresenter Colision with ", obj)
   }
 }

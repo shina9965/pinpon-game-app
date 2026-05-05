@@ -7,24 +7,27 @@ import { TestGameObject } from "./TestGameObject"
 import { Renderer, type IRenderer } from "../View"
 import { BlockPresenter } from "./BlockPresenter"
 import { PlayerPresenter } from "./PlayerPresenter"
+import { ColisionPresenter } from "./ColisionPresenter"
 
 export class GameObjectPresenter {
 
   private GameObjectList: IGameObject[] = []
   private gameEngine: GameEngine
   private renderer: IRenderer
+  private colisionPresenter: ColisionPresenter
 
   constructor(gameEngine: GameEngine) {
     this.gameEngine = gameEngine
     console.log("GameObjectPresenter initialized")
 
     this.renderer = new Renderer(gameEngine.canvas, gameEngine, this.GameObjectList)
+    this.colisionPresenter = new ColisionPresenter(gameEngine)
 
-    //テスト用のGameObjectを生成
-    const testGameObjectModel = new GameObjectModel("Rect", { x: 400, y: 500 }, { width: 80, height: 20 }, { x: 1, y: 0 }, "lightgreen")
-    const testGameObject = new PlayerPresenter(testGameObjectModel, this.gameEngine, this.gameEngine.inputModel)
-    this.GameObjectList.push(testGameObject)
-    //
+    const gameObjectModel = new GameObjectModel("Rect", { x: 400, y: 500 }, { width: 80, height: 20 }, { x: 1, y: 0 }, "lightgreen")
+    const gameObject = new PlayerPresenter(gameObjectModel, this.gameEngine, this.gameEngine.inputModel)
+    this.GameObjectList.push(gameObject)
+
+    
 
     const blockWidth = 70
     const blockHeight = 25
@@ -59,6 +62,10 @@ export class GameObjectPresenter {
 
         this.GameObjectList.push(block)
       }
+    }
+
+    for (let i = 0; i < this.GameObjectList.length; i++) {
+      this.colisionPresenter.AddColisionObject(this.GameObjectList[i])
     }
   }
 

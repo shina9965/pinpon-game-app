@@ -1,10 +1,10 @@
-import { type IUpdate, type IRendererUpdate } from "../Interface"
+import { type IUpdate, type IRendererUpdate, type IColisionObject } from "../Interface"
 import { GameEngine } from "./GameEngine"
 import {type IGameObjectModel} from "../Model/GameObjectModel"
 import { RigidBody } from "./RigidBody"
 import type { IInputModel } from "../Model"
 
-export interface IGameObject extends IUpdate{
+export interface IGameObject extends IUpdate, IColisionObject{
 
   GetGameObjectModel(): IGameObjectModel
 }
@@ -29,6 +29,7 @@ export abstract class GameObject implements IGameObject {
     this.gameEngine = gameEngine
     this.gameEngine.AddUpdateObject(this)
     this.gameEngine.AddRendererUpdateObject(this.rigidBody)
+    
 
     this.canvas = this.gameEngine.canvas
     const ctx = this.canvas.getContext("2d")
@@ -45,4 +46,5 @@ export abstract class GameObject implements IGameObject {
   }
 
   abstract Update() : void
+  abstract Colision(obj: IGameObject): void
 }

@@ -1,7 +1,7 @@
 //BlockPresenter.ts
 //ブロックに関するクラス。
 
-import { GameObject } from "./GameObject";
+import { GameObject, type IGameObject } from "./GameObject";
 import type { IGameObjectModel } from "../Model/GameObjectModel"
 import type { IInputModel } from "../Model";
 import { GameEngine } from "./GameEngine";
@@ -17,5 +17,9 @@ export class BlockPresenter extends GameObject {
 
     
 
+  }
+
+  public Colision(obj: IGameObject) {
+      console.log("BlockPresenter Colision with ", obj)
   }
 }

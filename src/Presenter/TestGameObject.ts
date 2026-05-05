@@ -1,4 +1,4 @@
-import { GameObject } from "./GameObject";
+import { GameObject, type IGameObject } from "./GameObject";
 import type { IGameObjectModel } from "../Model/GameObjectModel"
 import type { IInputModel } from "../Model";
 import { GameEngine } from "./GameEngine";
@@ -14,13 +14,11 @@ export class TestGameObject extends GameObject {
 
     console.log("TestGameObject Update called", this.GameObjectModel.GetPosition().x)
 
-    if(this.inputModel.GetRightPressed()){
-      this.GameObjectModel.SetPosition(this.GameObjectModel.GetPosition().x + 20, this.GameObjectModel.GetPosition().y)
+    this.rigidBody.Move(0.2)
 
-    }
-    if(this.inputModel.GetLeftPressed()){
-      this.GameObjectModel.SetPosition(this.GameObjectModel.GetPosition().x - 20, this.GameObjectModel.GetPosition().y)
-    }
+  }
 
+  public Colision(obj: IGameObject) {
+      console.log("TestGameObject Colision with ", obj)
   }
 }
